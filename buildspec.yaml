@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - npm install
+  pre_build:
+    commands:
+      - echo "Starting build process..."
+  build:
+    commands:
+      - echo "Building the React app..."
+      - npm run build
+
+artifacts:
+  files:
+    - "build/**/*"
+    - appspec.yml
+    - "scripts/**/*"
