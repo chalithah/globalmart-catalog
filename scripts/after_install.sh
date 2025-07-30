@@ -19,9 +19,6 @@ if [ -f /etc/nginx/conf.d/default.conf ]; then
   sudo rm -f /etc/nginx/conf.d/default.conf
 fi
 
-# Set proper permissions
+# Set proper permissions and restart nginx
 sudo chmod -R 755 /usr/share/nginx/html
-sudo chown -R nginx:nginx /usr/share/nginx/html
-
-# Restart nginx
-sudo systemctl restart nginx || sudo service nginx restart
+sudo systemctl restart nginx
