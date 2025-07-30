@@ -1,8 +1,13 @@
 #!/bin/bash
 set -e
 
-# Configure Nginx for React SPA
-cat > /etc/nginx/conf.d/react-app.conf << 'EOL'
+echo "Starting AfterInstall..."
+
+# Set proper permissions
+chmod -R 755 /usr/share/nginx/html
+
+# Create nginx config for React SPA
+cat > /etc/nginx/conf.d/default.conf << 'EOL'
 server {
     listen 80;
     server_name _;
@@ -15,12 +20,11 @@ server {
 }
 EOL
 
-# Remove default config
-rm -f /etc/nginx/conf.d/default.conf
-
-# Set permissions
-chmod -R 755 /usr/share/nginx/html
-
-# Test nginx config and restart
+# Test nginx config
 nginx -t
-systemctl restart nginx
+
+# Start nginx
+systemctl start nginx
+systemctl enable nginx
+
+echo "AfterInstall completed"
