@@ -1,6 +1,16 @@
 #!/bin/bash
-# Ensure nginx is installed and deployment directory exists
-if [ ! -d /usr/share/nginx/html ]; then
-  mkdir -p /usr/share/nginx/html
+set -e
+
+# Install nginx if not present
+if ! command -v nginx &> /dev/null; then
+    yum update -y
+    yum install -y nginx
 fi
+
+# Ensure nginx is enabled and started
+systemctl enable nginx
+systemctl start nginx
+
+# Create deployment directory
+mkdir -p /usr/share/nginx/html
 rm -rf /usr/share/nginx/html/*
