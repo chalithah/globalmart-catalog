@@ -4,18 +4,24 @@ phases:
   install:
     runtime-versions:
       nodejs: 16
-    commands:
-      - npm install
   pre_build:
     commands:
-      - echo "Starting build process..."
+      - echo Installing dependencies...
+      - npm install
   build:
     commands:
-      - echo "Building the React app..."
-      - CI=true npm run build
+      - echo Building the React app...
+      - npm run build
+      - echo Listing files before artifacts...
+      - ls -la
+      - echo Copying deployment files...
+      - cp appspec.yml build/
+      - cp -r scripts build/
+      - echo Final build directory contents...
+      - ls -la build/
 
 artifacts:
   files:
-    - "build/**/*"
-    - appspec.yaml
-    - "scripts/**/*"
+    - "**/*"
+  base-directory: build
+  name: react-app-build
