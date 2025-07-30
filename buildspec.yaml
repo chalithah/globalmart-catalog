@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 16
+      nodejs: 18
     commands:
       - npm install
   pre_build:
@@ -17,5 +17,5 @@ phases:
 artifacts:
   files:
     - "build/**/*"
-    - appspec.yml
+    - appspec.yaml
     - "scripts/**/*"
