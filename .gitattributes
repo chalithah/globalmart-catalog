@@ -1,0 +1,16 @@
+# Ensure shell scripts always have LF line endings
+*.sh text eol=lf
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Force specific files to use LF
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+
+# Force batch scripts to use CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf

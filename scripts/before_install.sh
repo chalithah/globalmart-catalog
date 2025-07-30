@@ -1,17 +1,14 @@
 #!/bin/bash
-set -e  # Exit on any error
 
-echo "Starting BeforeInstall..."
+# Ensure nginx is installed
+if ! command -v nginx &> /dev/null; then
+    sudo yum install -y nginx || sudo apt-get install -y nginx
+fi
 
-# Install nginx if not present
-yum update -y
-yum install -y nginx
+# Create directory if it doesn't exist
+if [ ! -d /usr/share/nginx/html ]; then
+  sudo mkdir -p /usr/share/nginx/html
+fi
 
-# Create and clean destination
-mkdir -p /usr/share/nginx/html
-rm -rf /usr/share/nginx/html/*
-
-# Stop nginx
-systemctl stop nginx || true
-
-echo "BeforeInstall completed"
+# Remove existing files
+sudo rm -rf /usr/share/nginx/html/*
